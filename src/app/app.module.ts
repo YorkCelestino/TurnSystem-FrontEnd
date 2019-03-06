@@ -1,18 +1,70 @@
+/**
+ * Modules
+ */
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { DataTablesModule } from 'angular-datatables';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { UtilsModule } from './utils/utils.module';
+
+/**
+ * Components
+ */
 import { AppComponent } from './app.component';
+import { LoginComponent } from './components/login/login.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { AtencionComponent } from './components/atencion/atencion.component';
+import { UsersComponent } from './components/users/users.component';
+import { DepartmentsComponent } from './components/departments/departments.component';
+import { ConfigurationComponent } from './components/configuration/configuration.component';
+import { EsperaComponent } from './components/espera/espera.component';
+import { ReportsComponent } from './components/reports/reports.component';
+import { TurnsComponent } from './components/turns/turns.component';
+
+/**
+ * services
+ */
+import { UsersService } from './services/users.service';
+import { DepartmentsService } from './services/departments.service';
+import { AuthInterceptor } from './auth/auth.interceptor';
+import { UserService } from './auth/user.service';
+import { AuthGuard } from './auth/auth.guard';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    AdminComponent,
+    AtencionComponent,
+    UsersComponent,
+    DepartmentsComponent,
+    ConfigurationComponent,
+    EsperaComponent,
+    ReportsComponent,
+    TurnsComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    FormsModule,
+    AppRoutingModule,
+    DataTablesModule,
+    HttpClientModule,
+    UtilsModule,
   ],
-  providers: [],
+  providers: [
+    UsersService,
+    DepartmentsService,
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  },
+  AuthGuard,
+  UserService
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

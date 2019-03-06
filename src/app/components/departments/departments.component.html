@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="cuadro">
+        <div class="row">
+            <div class="col diseño-titulos mt-3">
+                <i class="fa fa-building"></i> Lista de departamentos
+            </div>
+
+            <!-- Button trigger modal -->
+            <div class="d-flex bd-highlight mb-3 col">
+                <div class="ml-auto mr-3 mt-1 p-2 bd-highlight">
+                    <button type="button" class="btn btn-outline-primary btn-lg mr-aurto" data-toggle="modal" data-target="#DepartmentRegister">
+                    <i class="fas fa-building"> </i> <i class="fa fa-plus ml-1"></i>
+                </button>
+                    <app-register-departments [department]="selected"></app-register-departments>
+                </div>
+            </div>
+        </div>
+        <hr class="mt-auto">
+
+        <div class="container">
+            <table datatable class="row-border hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Departamento</th>
+                        <th>Descripcion</th>
+                        <th>Estado</th>
+                        <th>Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let department of departments">
+                        <td>{{department.id_Departamento}}</td>
+                        <td>{{department.nombreDepartamento}}</td>
+                        <td>{{department.descripcion}}</td>
+                        <td>{{department.estado}}</td>
+                        <td>
+                            <button data-toggle="modal" data-target="#Departmentedit" (click)="toggleModal(department)" type="button" title="Editar" class="btn btn-outline-warning">
+                                <i class="fa fa-edit" style="color:orange;"></i>
+                            </button>
+                            <button (click)="deleteDepartment(department.Id_Departamento)" type="button" title="Borrar" class="btn btn-outline-danger" style="margin-left: 2px;">
+                                  <i class="fa fa-trash" style="color:red;"></i>
+                            </button>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

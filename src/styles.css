@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+
+@font-face {
+    font-family: Poppins-Bold;
+    src: url('src/assets/fonts/poppins/Poppins-Bold.ttf');
+}
+
+.cuadro {
+    height: 500px;
+    width: 109%;
+    margin-top: auto;
+    background-color: #f5f5f5;
+    box-shadow: 0px -5px 0px 0px rgba(66, 139, 202, 1);
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 0px solid #000000;
+}
+
+.diseño-titulos {
+    font-family: Poppins-Bold;
+    font-size: 30px;
+    text-indent: 12px;
+}

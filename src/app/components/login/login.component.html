@@ -1,0 +1,32 @@
+<div class="container-login100">
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!--titulos  -->
+
+            <!-- imagen -->
+            <div class="fadeIn first login100-form-title" style="background-image:url(../src/../../../../../assets/img/it-bg01.jpg);">
+
+                <h1 class="login100-form-title-1">Acceso al Sistema</h1>
+
+            </div>
+            <br>
+            <br>
+            <!-- formulario de inicio de secion -->
+            <form #signInForm="ngForm" (ngSubmit)="onSubmit(signInForm)">
+                <input type="text" name="usuarios" [(ngModel)]="model.usuarios" placeholder="Email" required [ngClass]="{'invalid-textbox' :signInForm.submitted}">
+                <input type="password" name="password" #password="ngModel" [(ngModel)]="model.password" placeholder="Password" required minlength="4" [ngClass]="{'invalid-textbox' :signInForm.submitted && !password.valid }">
+                <div *ngIf="signInForm.submitted && password.errors?.minlength">
+                    <label class="validation-message">Minimum 4 characters.</label>
+                </div>
+                <input type="submit" value="Sign In">
+            </form>
+            <br>
+
+            <!-- enlase de contraseña olvidada -->
+            <div id="formFooter">
+                <a class="underlineHover" href="#">Olvidaste tu contraeña</a>
+            </div>
+
+        </div>
+    </div>
+</div>
