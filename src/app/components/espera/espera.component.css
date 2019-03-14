@@ -1,0 +1,39 @@
+@font-face {
+    font-family: Poppins-Bold;
+    src: url('src/assets/fonts/poppins/Poppins-Bold.ttf');
+}
+
+.header {
+    background: rgba(102, 214, 255, 1);
+    background: -moz-linear-gradient(left, rgba(102, 214, 255, 1) 28%, rgba(134, 222, 255, 1) 38%, rgba(173, 232, 255, 1) 50%, rgba(98, 216, 255, 1) 73%, rgba(10, 198, 255, 1) 100%);
+    background: -webkit-gradient(left top, right top, color-stop(28%, rgba(102, 214, 255, 1)), color-stop(38%, rgba(134, 222, 255, 1)), color-stop(50%, rgba(173, 232, 255, 1)), color-stop(73%, rgba(98, 216, 255, 1)), color-stop(100%, rgba(10, 198, 255, 1)));
+    background: -webkit-linear-gradient(left, rgba(102, 214, 255, 1) 28%, rgba(134, 222, 255, 1) 38%, rgba(173, 232, 255, 1) 50%, rgba(98, 216, 255, 1) 73%, rgba(10, 198, 255, 1) 100%);
+    background: -o-linear-gradient(left, rgba(102, 214, 255, 1) 28%, rgba(134, 222, 255, 1) 38%, rgba(173, 232, 255, 1) 50%, rgba(98, 216, 255, 1) 73%, rgba(10, 198, 255, 1) 100%);
+    background: -ms-linear-gradient(left, rgba(102, 214, 255, 1) 28%, rgba(134, 222, 255, 1) 38%, rgba(173, 232, 255, 1) 50%, rgba(98, 216, 255, 1) 73%, rgba(10, 198, 255, 1) 100%);
+    background: linear-gradient(to right, rgba(102, 214, 255, 1) 28%, rgba(134, 222, 255, 1) 38%, rgba(173, 232, 255, 1) 50%, rgba(98, 216, 255, 1) 73%, rgba(10, 198, 255, 1) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#66d6ff', endColorstr='#0ac6ff', GradientType=1);
+    min-height: 122px;
+}
+
+.containersTurns {
+    width: 100%;
+    min-height: 19em;
+    /*border-style: double;*/
+    -webkit-box-shadow: inset 0px 0px 12px 4px rgba(0, 0, 0, 0.31);
+    -moz-box-shadow: inset 0px 0px 12px 4px rgba(0, 0, 0, 0.31);
+    box-shadow: inset 0px 0px 12px 4px rgba(0, 0, 0, 0.31);
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 0px solid #000000;
+}
+
+.contanierImagen {
+    width: 99%;
+    min-height: 19em;
+    border-style: double;
+}
+
+.row {
+    margin-right: 9px;
+}

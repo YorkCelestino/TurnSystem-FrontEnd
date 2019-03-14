@@ -7,7 +7,7 @@ import { User } from '../models/users';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserServiceLogin {
   selectedUser: User = {
     nombre: '',
     usuarios: '',
@@ -28,10 +28,6 @@ export class UserService {
     return this.http.post(environment.apiBaseUrl + '/users/authenticate', authCredentials, this.noAuthHeader);
   }
 
-  getUserProfile() {
-    return this.http.get(environment.apiBaseUrl + '/users/userProfile');
-  }
-
 
   // Helper Methods
 
@@ -50,18 +46,22 @@ export class UserService {
   getUserPayload() {
     const token = this.getToken();
     if (token) {
+      // tslint:disable-next-line:prefer-const
       let userPayload = atob(token.split('.')[1]);
       return JSON.parse(userPayload);
-    }
-    else
+
+    } else {
       return null;
+    }
   }
 
   isLoggedIn() {
-    var userPayload = this.getUserPayload();
-    if (userPayload)
+    // tslint:disable-next-line:prefer-const
+    let userPayload = this.getUserPayload();
+    if (userPayload) {
       return userPayload.exp > Date.now() / 1000;
-    else
+    } else {
       return false;
+    }
   }
 }

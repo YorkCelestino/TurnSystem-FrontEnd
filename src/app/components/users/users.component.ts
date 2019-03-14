@@ -21,10 +21,12 @@ export class UsersComponent implements OnInit {
     ) {
     this.getUsers();
   }
+
   toggleModal (data: any) {
     this.selected = data;
     console.log(this.selected);
   }
+
   ngOnInit () {
   }
 

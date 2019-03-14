@@ -1,11 +1,54 @@
-<div class="container-fluid">
-    <div class="cuadro">
+<!--div class="container-fluid">
+    <div>
         <div class="diseño-titulos mt-2">
             <i class="fa fa-sort-numeric-down"></i> Turnos
         </div>
         <hr>
-        <p style="font-size: 100px;" class="text-center">
-            <strong class="mt-5">coming soon</strong>
-        </p>
+
+        <button routerLink="/atencion" (click)="closeFullscreen()">back</button>
+        <div class="card bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header">Header</div>
+            <div class="card-body">
+                <h5 class="card-title">Light card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+        </div>
+    </div>
+</div-->
+
+<div class="header">
+    <div class="container">
+        <div class="text-center">
+            <img src="../../../assets/img/Logo-UCATECI.png" class="mt-3" width="300px" height="100px" alt="Logo">
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="text-center mt-3">
+        <strong class="diseño-titulos">Bienvenid@</strong>
+    </div>
+</div>
+<router-outlet></router-outlet>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 text-center">
+
+            <div class="containersTurns">
+
+                <strong> <p>Seleccione una opción</p> </strong>
+                <br>
+                <br>
+                <br>
+
+                <a routerLink="/turns/matricula" class="btn radio ">
+                    <span>Matrícula</span>
+                </a>
+                <button class="btn radio">
+                    <span>Cédula</span>
+                </button>
+            </div>
+        </div>
+
     </div>
 </div>

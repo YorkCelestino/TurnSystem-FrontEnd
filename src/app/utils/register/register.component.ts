@@ -12,7 +12,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  listanombreDepartamento: any = []; /*Array name of departments */
+  listaNombreDepartamento: any = []; /*Array name of departments */
   @Input() user: User;
   public form: FormGroup;
 
@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
   getNameDepartments() {
     this.usersService.getNameDeparment().subscribe(
       res => {
-        this.listanombreDepartamento = res;
+        this.listaNombreDepartamento = res;
       },
       err => console.log(err)
      );
@@ -54,7 +54,7 @@ export class RegisterComponent implements OnInit {
   saveNewUser() {
     // delete this.user.Id_Usuario;
     // delete this.user.Estado;
-    this.usersService.seveUser(this.form.value).subscribe(
+    this.usersService.saveUser(this.form.value).subscribe(
       res => {
         console.log(this.form.value);
         this.form.reset();
@@ -72,7 +72,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  EditUser(id: any) {
+  editUser(id: any) {
       console.log(id);
   }
 }

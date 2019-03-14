@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/auth/user.service';
+import { UserServiceLogin } from 'src/app/auth/user.service';
+import { Console } from '@angular/core/src/console';
 
 
 @Component({
@@ -12,31 +13,34 @@ import { UserService } from 'src/app/auth/user.service';
 export class LoginComponent implements OnInit {
 
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userServiceLogin: UserServiceLogin, private router: Router) { }
 
   model = {
-    usuarios : '',
+    usuarios: '',
     password: ''
   };
   // tslint:disable-next-line:max-line-length
   emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   serverErrorMessages: string;
   ngOnInit() {
-    if (this.userService.isLoggedIn()) {
-    this.router.navigateByUrl('/userprofile');
+    if (this.userServiceLogin.isLoggedIn()) {
+      this.router.navigateByUrl('/atencion');
     }
   }
 
   onSubmit(form: NgForm) {
-    this.userService.login(form.value).subscribe(
+    this.userServiceLogin.login(form.value).subscribe(
       res => {
-        this.userService.setToken(res['token']);
-        this.router.navigateByUrl('/turns');
+
+        console.log(this.userServiceLogin.login(form.value));
+        this.userServiceLogin.setToken(res['token']);
+        this.router.navigateByUrl('/atencion');
       },
       err => {
         this.serverErrorMessages = err.error.message;
       }
     );
+    // this.router.navigateByUrl('/atencion');
   }
 
 }

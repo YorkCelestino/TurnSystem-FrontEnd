@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { User } from '../models/users';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
+import { HttpClient } from '@angular/common/http';
 
 
 
@@ -9,27 +10,36 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UsersService {
-  API_URI = 'http://localhost:3000/api';
   constructor( private http: HttpClient) { }
 
-  getUsers(): Observable<User> {
-    return this.http.get(`${this.API_URI}/users`);
+  // getting one user
+  getUser() {
+    return this.http.get(environment.apiBaseUrl + '/users/user-info');
   }
 
+  // getting all Users
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(environment.apiBaseUrl + '/users/get-user-list');
+  }
+
+  // getting all name of departments
   getNameDeparment() {
-    return this.http.get(`${this.API_URI}/users/listdepartment`);
+    return this.http.get(environment.apiBaseUrl + '/users/get-list-department');
   }
 
-  seveUser( user: User) {
-    return this.http.post(`${this.API_URI}/users`, user);
+ // seve User
+  saveUser( user: User) {
+    return this.http.post(environment.apiBaseUrl + '/users/add-user', user);
   }
 
+  // change Status of one User
   deleteUser(id: any) {
-    return this.http.delete(`${this.API_URI}/users/${id}`);
+    return this.http.delete(environment.apiBaseUrl + '/users/delete-user', { params: {id}});
   }
 
-  updateUser(id: any , updatedUser: User): Observable<User> {
-    return this.http.put(`${this.API_URI}/users/${id}`, updatedUser);
+  // Updating User
+  updateUser(updatedUser: User): Observable<User> {
+    return this.http.post('/users/update-user', updatedUser);
 
   }
 }

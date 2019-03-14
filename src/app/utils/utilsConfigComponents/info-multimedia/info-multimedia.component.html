@@ -1,0 +1,69 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm mt-3">
+
+            <label><strong>Logo(.png-max. 2MB )</strong></label>
+            <div>
+                <button class="btn btn-info"> <i class="fa fa-folder-open"></i> Subir un logo</button>
+
+                <img src="../../../../assets/Logo-UCATECI-2 ico.ico" class="img-responsive float-right mr-auto" height="70" width="70" alt="Image">
+
+            </div>
+            <br>
+            <label><strong>Video(.png-max. 40MB )</strong></label>
+            <div>
+                <button class="btn btn-info"> <i class="fa fa-folder-open"></i> Subir un Video</button>
+
+                <video class="float-right mr-auto" width="80" height="80" controls>
+                    <source src="../../../../assets/prueva.mp4" type="video/ogg">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+
+        </div>
+
+        <div class="col-sm mt-3">
+            <label><strong>Timbre(.mp3-max. 1MB )</strong></label>
+            <div>
+
+                <button class="btn btn-info"> <i class="fa fa-folder-open"></i> Subir un Timbre</button>
+                <audio class="img-responsive float-right mr-auto" controls>
+                    <source src="horse.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="container">
+
+        <strong> <i class="fa fa-video"></i> Lista de videos</strong>
+        <hr>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Vista previs</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td scope="row">1</td>
+                    <td>hola</td>
+                    <td>
+                        <video width="80" height="80" controls>
+                            <source src="../../../../assets/prueva.mp4" type="video/ogg">
+                            Your browser does not support the video tag.
+                        </video>
+                    </td>
+                    <td><button>Editar</button> <button>Eliminar</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <router-outlet></router-outlet>
+</div>

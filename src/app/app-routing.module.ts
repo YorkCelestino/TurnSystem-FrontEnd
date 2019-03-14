@@ -17,25 +17,48 @@ import { ConfigurationComponent } from './components/configuration/configuration
 import { EsperaComponent } from './components/espera/espera.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { TurnsComponent } from './components/turns/turns.component';
+import { MatriculaComponent } from './utils/utilsTurnComponents/matricula/matricula.component';
 
 const routes: Routes = [
   { path: '',
   canActivate: [AuthGuard],
   component: AdminComponent,
   children: [
-    {path: 'atencion', component: AtencionComponent},
-    {path: 'configuration', component: ConfigurationComponent},
-    {path: 'departments', component: DepartmentsComponent},
+    {
+      path: 'atencion', component: AtencionComponent
+    },
+    {
+      path: 'configuration', component: ConfigurationComponent,
+      children: [
+        {
+          path: 'infoInstitution', loadChildren: './utils/utils.module#UtilsModule'
+        },
+        {
+          path: 'InfoMultimedia', loadChildren: './utils/utils.module#UtilsModule'
+        }
+      ]
+    },
+    {
+      path: 'departments', component: DepartmentsComponent
+    },
     {path: 'users', component: UsersComponent},
-    {path: 'espera', component: EsperaComponent},
     {path: 'report', component: ReportsComponent},
-    {path: 'turns', component: TurnsComponent}
-  ] },
-  { path: 'login', component: LoginComponent }
+  ]
+},
+
+  {path: 'espera',  canActivate: [AuthGuard], component: EsperaComponent},
+
+  {path: 'turns', canActivate: [AuthGuard], component: TurnsComponent,
+    children: [
+      {path: 'matricula', component: MatriculaComponent}
+    ]
+  },
+
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { enableTracing: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

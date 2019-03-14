@@ -33,7 +33,7 @@
                             <label for="department"> <strong>Departamento <i style="color:red">*</i></strong></label>
 
                             <select id="department" name="department" formControlName="Id_departamento" class="form-control ">
-                                 <option *ngFor="let nombreDepartamento of listanombreDepartamento " [value]="nombreDepartamento.Id_departamento ">
+                                 <option *ngFor="let nombreDepartamento of listaNombreDepartamento " [value]="nombreDepartamento.Id_departamento ">
                                      {{nombreDepartamento.nombreDepartamento}}
                                 </option>
                             </select>
@@ -88,7 +88,7 @@
 
                                 <select id="department" name="department" class="form-control ">
                                                     
-                                     <option *ngFor="let nombreDepartamento of listanombreDepartamento" [value]="nombreDepartamento.Id_departamento ">
+                                     <option *ngFor="let nombreDepartamento of listaNombreDepartamento" [value]="nombreDepartamento.Id_departamento ">
                                          {{nombreDepartamento.nombreDepartamento}}
                                     </option>
                                 </select>
@@ -97,7 +97,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button (click)="EditUser(form.value)" type="button" class="btn btn-primary">Editar</button>
+                        <button (click)="editUser(form.value)" type="button" class="btn btn-primary">Editar</button>
                     </div>
                 </form>
             </div>

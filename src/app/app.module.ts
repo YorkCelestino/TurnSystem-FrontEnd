@@ -21,6 +21,9 @@ import { ConfigurationComponent } from './components/configuration/configuration
 import { EsperaComponent } from './components/espera/espera.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { TurnsComponent } from './components/turns/turns.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { AboutComponent } from './components/about/about.component';
+import { StartComponent } from './components/start/start.component';
 
 /**
  * services
@@ -28,9 +31,11 @@ import { TurnsComponent } from './components/turns/turns.component';
 import { UsersService } from './services/users.service';
 import { DepartmentsService } from './services/departments.service';
 import { AuthInterceptor } from './auth/auth.interceptor';
-import { UserService } from './auth/user.service';
+import { UserServiceLogin } from './auth/user.service';
 import { AuthGuard } from './auth/auth.guard';
 import { FormsModule } from '@angular/forms';
+
+
 
 
 @NgModule({
@@ -44,7 +49,10 @@ import { FormsModule } from '@angular/forms';
     ConfigurationComponent,
     EsperaComponent,
     ReportsComponent,
-    TurnsComponent
+    TurnsComponent,
+    ProfileComponent,
+    AboutComponent,
+    StartComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,7 +71,7 @@ import { FormsModule } from '@angular/forms';
     multi: true
   },
   AuthGuard,
-  UserService
+  UserServiceLogin
 ],
   bootstrap: [AppComponent]
 })
