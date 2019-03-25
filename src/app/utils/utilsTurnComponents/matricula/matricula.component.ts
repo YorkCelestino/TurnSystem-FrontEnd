@@ -83,7 +83,6 @@ import { Router } from '@angular/router';
         res => {
           console.log(res);
           this.router.navigateByUrl('/turns/motivoTurno');
-          /*funciona*/
          },
         err => {
           console.log(err);
