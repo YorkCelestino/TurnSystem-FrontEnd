@@ -18,6 +18,9 @@ import { EsperaComponent } from './components/espera/espera.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { TurnsComponent } from './components/turns/turns.component';
 import { MatriculaComponent } from './utils/utilsTurnComponents/matricula/matricula.component';
+import { OptionsComponent } from './utils/utilsTurnComponents/options/options.component';
+import { CedulaComponent } from './utils/utilsTurnComponents/cedula/cedula.component';
+import { MotivoTurnoComponent } from './utils/utilsTurnComponents/motivo-turno/motivo-turno.component';
 
 const routes: Routes = [
   { path: '',
@@ -50,10 +53,12 @@ const routes: Routes = [
 
   {path: 'turns', canActivate: [AuthGuard], component: TurnsComponent,
     children: [
-      {path: 'matricula', component: MatriculaComponent}
+      {path: 'options', component: OptionsComponent},
+      {path: 'matricula', component: MatriculaComponent },
+      {path: 'cedula', component: CedulaComponent},
+      {path: 'motivoTurno', component: MotivoTurnoComponent}
     ]
   },
-
   { path: 'login', component: LoginComponent },
 ];
 

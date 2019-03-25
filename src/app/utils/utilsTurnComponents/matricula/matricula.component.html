@@ -1,3 +1,55 @@
-<p>
-    matricula works!
-</p>
+<div class="text-center mt-3">
+    <strong class="diseño-titulos">Digiatar matrícula</strong>
+</div>
+<br>
+<div class="container">
+    <div class="containersTurns">
+        <form [formGroup]="form" (ngSubmit)="addPerson()">
+
+            <div class="row">
+                <div class="mt-4 col-md-6 offset-md-2 pantalla">
+                    <div class="input-group input-group-lg">
+
+                        <input [textMask]="{mask: mask}" #screenValue (keypress)="_keyPress($event)" formControlName="identificador" type="text" class="form-control bg-light text-center" placeholder="Ej: 20160662" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
+                            required minlength="7" [ngClass]="{'is-invalid': submitted && f.identificador.errors}">
+                        <div *ngIf="submitted && f.identificador.errors && f.identificador.errors?.minlength" class="invalid-feedback">
+                            Matrícula invalida
+                        </div>
+
+                    </div>
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="col-md-7 offset-md-2">
+                    <input type="button" class="mt-2 ml-4 btn boton click" value="1" #value1 (click)="buttonsValues(value1.value)">
+                    <input type="button" class="mt-2 ml-4 btn boton click" value="2" #value2 (click)="buttonsValues(value2.value)">
+                    <input type="button" class="mt-2 ml-4 btn boton click" value="3" #value3 (click)="buttonsValues(value3.value)">
+
+                    <input type="button" class="mt-3 ml-4 btn boton click" value="4" #value4 (click)="buttonsValues(value4.value)">
+                    <input type="button" class="mt-3 ml-4 btn boton click" value="5" #value5 (click)="buttonsValues(value5.value)">
+                    <input type="button" class="mt-3 ml-4 btn boton click" value="6" #value6 (click)="buttonsValues(value6.value)">
+
+                    <input type="button" class="mt-3 ml-4 btn boton click" value="7" #value7 (click)="buttonsValues(value7.value)">
+                    <input type="button" class="mt-3 ml-4 btn boton click" value="8" #value8 (click)="buttonsValues(value8.value)">
+                    <input type="button" class="mt-3 ml-4 btn boton click" value="9" #value9 (click)="buttonsValues(value9.value)">
+                    <input style="width: 48%;" type="button" class="mt-3 ml-4 btn boton click" value="0" #value (click)="buttonsValues(value.value)">
+                    <input type="button" class="mt-3 ml-4 btn boton click" value="<-" (click)="deleteLast()">
+
+                </div>
+            </div>
+            <br>
+            <div class="mt-3">
+                <a routerLink="/turns/options" class="btn btnoptins click" style="margin-right:6em;" role="button">Cancelar</a>
+                <button class="btn btnoptins click" style="color:white" type="submit" role="button">Aceptar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- <a routerLink="/turns/matricula" class="btn radio ">
+    <span>Matrícula</span>
+</a>
+<button class="btn radio">
+    <span>Cédula</span>
+</button> -->

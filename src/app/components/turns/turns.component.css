@@ -15,20 +15,6 @@
     min-height: 122px;
 }
 
-.containersTurns {
-    width: 100%;
-    min-height: 32em;
-    /*border-style: double;*/
-    -webkit-box-shadow: inset 0px 0px 12px 4px rgba(0, 0, 0, 0.31);
-    -moz-box-shadow: inset 0px 0px 12px 4px rgba(0, 0, 0, 0.31);
-    box-shadow: inset 0px 0px 12px 4px rgba(0, 0, 0, 0.31);
-    border-radius: 10px 10px 10px 10px;
-    -moz-border-radius: 10px 10px 10px 10px;
-    -webkit-border-radius: 10px 10px 10px 10px;
-    border: 0px solid #000000;
-    position: absolute;
-}
-
 div strong p {
     margin-top: 2em;
     font-family: Poppins-Bold;

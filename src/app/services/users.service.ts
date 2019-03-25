@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from '../models/users';
+import { User, UserSave } from '../models/users';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
@@ -38,8 +38,8 @@ export class UsersService {
   }
 
   // Updating User
-  updateUser(updatedUser: User): Observable<User> {
-    return this.http.post('/users/update-user', updatedUser);
+  updateUser(id: any , updatedUser: UserSave): Observable<UserSave> {
+    return this.http.post(environment.apiBaseUrl + '/users/update-user/' + id, updatedUser);
 
   }
 }

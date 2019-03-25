@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UtilsRoutingModule } from './utils-routing.module';
+import { TextMaskModule } from 'angular2-text-mask';
 
 /**
  *components
@@ -21,6 +22,9 @@ import { UsersService } from '../services/users.service';
 import { DepartmentsService } from '../services/departments.service';
 import { InfoMultimediaComponent } from './utilsConfigComponents/info-multimedia/info-multimedia.component';
 import { MatriculaComponent } from './utilsTurnComponents/matricula/matricula.component';
+import { OptionsComponent } from './utilsTurnComponents/options/options.component';
+import { CedulaComponent } from './utilsTurnComponents/cedula/cedula.component';
+import { MotivoTurnoComponent } from './utilsTurnComponents/motivo-turno/motivo-turno.component';
 
 @NgModule({
   declarations: [
@@ -28,19 +32,25 @@ import { MatriculaComponent } from './utilsTurnComponents/matricula/matricula.co
     RegisterDepartmentsComponent,
     InfoInstitutionComponent,
     InfoMultimediaComponent,
-    MatriculaComponent
+    MatriculaComponent,
+    OptionsComponent,
+    CedulaComponent,
+    MotivoTurnoComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    UtilsRoutingModule
+    UtilsRoutingModule,
+    TextMaskModule
   ],
   exports: [
     RegisterComponent,
     RegisterDepartmentsComponent,
-    InfoInstitutionComponent
+    InfoInstitutionComponent,
+    OptionsComponent,
+    MatriculaComponent,
   ],
   providers: [
     UsersService,

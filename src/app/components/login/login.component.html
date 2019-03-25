@@ -14,6 +14,9 @@
             <!-- formulario de inicio de secion -->
             <form #signInForm="ngForm" (ngSubmit)="onSubmit(signInForm)">
                 <input type="text" name="usuarios" [(ngModel)]="model.usuarios" placeholder="Usuario" required [ngClass]="{'invalid-textbox' :signInForm.submitted}">
+                <div *ngIf="signInForm.submitted">
+                    <label class="validation-message">Usuario incrrecto</label>
+                </div>
                 <input type="password" name="password" #password="ngModel" [(ngModel)]="model.password" placeholder="Contraseña" required minlength="4" [ngClass]="{'invalid-textbox' :signInForm.submitted && !password.valid }">
                 <!--div *ngIf="signInForm.submitted && password.errors?.minlength">
                 <label class="validation-message">Minimum 4 characters.</label>

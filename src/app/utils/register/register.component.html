@@ -1,48 +1,70 @@
 <!-- Modal -->
-<div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+<div class="modal fade" id="saveUser" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
 
             <div class="modal-header">
                 <h5 class="modal-title"><i class="fa fa-user-plus"></i> Registrar Usuarios</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <form [formGroup]="form">
-                <div class="modal-body">
-                    <div class="container-fluid">
+            <form [formGroup]="form" (ngSubmit)="saveUser()">
+                <div class="modal-body ">
+                    <div class="container-fluid ">
 
-                        <div class="form-group">
-                            <strong> Nombre <i style="color:red">*</i></strong>
-                            <input type="text" name="nombre" formControlName="nombre" class="form-control" value="" placeholder="nombre">
+                        <div class="form-group ">
+                            <strong> Nombre <i style="color:red ">*</i></strong>
+                            <input type="text" name="nombre" formControlName="nombre" class="form-control " value="" placeholder="nombre " [ngClass]="{'is-invalid': submitted && f.nombre.errors}" />
+                            <div *ngIf="submitted && f.nombre.errors" class="invalid-feedback">
+                                Nombre es requerido
+                                <!--div *ngIf="form.controls.nombreDepartamento.errors.required">Nombre departamento es requerido</div-->
+                            </div>
 
-                            <strong> Apellido <i style="color:red">*</i></strong>
-                            <input type="text" name="apellido" formControlName="apellido" class="form-control" value="" placeholder="Apellido">
+                            <strong> Apellido <i style="color:red ">*</i></strong>
+                            <input type="text" name="apellido" formControlName="apellido" class="form-control " value="" placeholder="Apellido" [ngClass]="{'is-invalid': submitted && f.apellido.errors}" />
+                            <div *ngIf="submitted && f.apellido.errors" class="invalid-feedback">
+                                Apellido es requerido
+                            </div>
 
-                            <strong> Cedula <i style="color:red">*</i></strong>
-                            <input type="text" name="cedula" formControlName="cedula" class="form-control" value="" placeholder="Cedula">
+                            <strong> Cedula <i style="color:red ">*</i></strong>
+                            <input type="text" name="cedula" formControlName="cedula" class="form-control " value="" placeholder="Cedula" [ngClass]="{'is-invalid': submitted && f.cedula.errors}" />
+                            <div *ngIf="submitted && f.cedula.errors" class="invalid-feedback">
+                                Cedula es requerido
+                            </div>
 
-                            <strong> Usuario <i style="color:red">*</i></strong>
-                            <input type="text" name="usuario" formControlName="usuarios" class="form-control" value="" placeholder="usuario">
+                            <strong> Usuario <i style="color:red ">*</i></strong>
+                            <input type="text" name="usuario " formControlName="usuarios" class="form-control " value="" placeholder="usuario" [ngClass]="{'is-invalid': submitted && f.usuarios.errors}" />
+                            <div *ngIf="submitted && f.usuarios.errors" class="invalid-feedback">
+                                Usuario es requerido
+                            </div>
 
-                            <strong> Contraseña <i style="color:red">*</i></strong>
-                            <input type="text" name="contraseña" formControlName="password" class="form-control" value="" placeholder="contraseña">
+                            <strong> Contraseña <i style="color:red ">*</i></strong>
+                            <input type="password" name="contraseña" formControlName="password" class="form-control " value="" placeholder="contraseña" [ngClass]="{'is-invalid': submitted && f.password.errors}" />
+                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                Contraseña es requerido
+                            </div>
 
+                            <!--strong> Confiarmar Contraseña: <i style="color:red ">*</i></strong>
+                            <input type="password " name="contraseña2 " class="form-control " value=" " placeholder="Confiarmar Contraseña "-->
 
-                            <label for="department"> <strong>Departamento <i style="color:red">*</i></strong></label>
+                            <label for="department "> <strong>Departamento <i style="color:red ">*</i></strong></label>
 
-                            <select id="department" name="department" formControlName="Id_departamento" class="form-control ">
+                            <!--select id="department " name="department " formControlName="Id_departamento" class="form-control " [ngClass]="{'is-invalid': submitted && f.Id_departamento.errors}">
                                  <option *ngFor="let nombreDepartamento of listaNombreDepartamento " [value]="nombreDepartamento.Id_departamento ">
                                      {{nombreDepartamento.nombreDepartamento}}
                                 </option>
                             </select>
+                            <label for="department "> <strong>Tipo de usuario: <i style="color:red ">*</i></strong></label><br>
+                            <input type="radio" name="gender" value="male"> Administrador<br>
+                            <input type="radio" name="gender" value="female"> Recepcionista <br>
+                            <input type="radio" name="gender" value="other"> Otros-->
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer ">
-                    <button type="button " class="btn btn-secondary " data-dismiss="modal">Cerrar</button>
-                    <button type="submit " class="btn btn-primary " (click)="saveNewUser()" data-dismiss="modal">Guardar</button>
+                    <button type="button " class="btn btn-secondary " data-dismiss="modal " ngc>Cerrar</button>
+                    <button type="submit " class="btn btn-primary ">Guardar</button>
                 </div>
             </form>
 
@@ -51,55 +73,40 @@
 </div>
 
 
-
-<!-- Modal edit user  -->
+<!-- Modal -->
 <div class="modal fade" id="editUser" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title"> <i class="fa fa-edit"></i> Editar Usuario</h5>
+                <h5 class="modal-title"><i class="fa fa-edit"></i> Editar Usuario</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
             </div>
             <div class="modal-body">
-                <form [formGroup]="form">
-                    <div class="modal-body">
-                        <div class="container-fluid">
+                <strong>Nombre <i style="color:red ">*</i></strong>
+                <input type="text" name="nombre" [(ngModel)]="user.nombre" class="form-control " placeholder="Nombre">
 
-                            <div class="form-group">
-                                <strong> Nombre <i style="color:red">*</i></strong>
-                                <input formControlName="nombre" type="text" name="nombre" class="form-control" value="" placeholder="nombre">
+                <strong>Apellido <i style="color:red ">*</i></strong>
+                <input type="text" name="apellido" [(ngModel)]="user.apellido" class="form-control " placeholder="Apellido">
 
-                                <strong> Apellido <i style="color:red">*</i></strong>
-                                <input type="text" name="apellido" class="form-control" value="" placeholder="Apellido">
+                <strong>Cedula <i style="color:red ">*</i></strong>
+                <input type="text" name="cedula" [(ngModel)]="user.cedula" class="form-control " placeholder="Cedula">
 
-                                <strong> Cedula <i style="color:red">*</i></strong>
-                                <input type="text" name="cedula" class="form-control" value="" placeholder="Cedula">
+                <strong>usuario <i style="color:red ">*</i></strong>
+                <input type="text" name="usuario" [(ngModel)]="user.usuarios" class="form-control " placeholder="Usuario">
 
-                                <strong> Usuario <i style="color:red">*</i></strong>
-                                <input type="text" name="usuario" class="form-control" value="" placeholder="usuario">
+                <label for="department "> <strong>Departamento <i style="color:red ">*</i></strong></label>
 
-                                <strong> Contraseña <i style="color:red">*</i></strong>
-                                <input type="text" name="contraseña" class="form-control" value="" placeholder="contraseña">
-
-
-                                <label for="department"> <strong>Departamento <i style="color:red">*</i></strong></label>
-
-                                <select id="department" name="department" class="form-control ">
-                                                    
-                                     <option *ngFor="let nombreDepartamento of listaNombreDepartamento" [value]="nombreDepartamento.Id_departamento ">
-                                         {{nombreDepartamento.nombreDepartamento}}
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button (click)="editUser(form.value)" type="button" class="btn btn-primary">Editar</button>
-                    </div>
-                </form>
+                <select id="department" name="department" [(ngModel)]="listaNombreDepartamento.Id_departamento" class="form-control " [ngClass]="{'is-invalid': submitted && f.Id_departamento.errors}">
+                     <option *ngFor="let nombreDepartamentos of listaNombreDepartamento" [value]="nombreDepartamentos.Id_departamento">
+                         {{nombreDepartamentos.nombreDepartamento}}
+                    </option>
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button (click)="closeModal()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button (click)="updateUser()" type="button" class="btn btn-primary">Guardar</button>
             </div>
         </div>
     </div>

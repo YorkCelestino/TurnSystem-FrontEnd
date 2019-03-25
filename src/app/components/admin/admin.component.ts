@@ -21,15 +21,13 @@ export class AdminComponent implements OnInit {
              // property for put full screen
              @Inject(DOCUMENT) private document: any) {
 
-               console.log('started');
+               // console.log('started');
                this.getUser();
               }
 
   ngOnInit() {
 
     this.elem = document.documentElement;
-
-    // call user logged in
   }
 
   /**
@@ -56,8 +54,10 @@ export class AdminComponent implements OnInit {
   getUser() {
     this.userService.getUser().subscribe(
       res => {
+        // call user logged in
         this.userInfo = res;
-        console.log(res);
+        // console.log('user information');
+        // console.log(res);
       },
       err => {
         console.log(err);

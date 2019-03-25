@@ -15,11 +15,12 @@ export class DepartmentsService {
     return this.http.get(`${this.API_URI}/departments`);
   }
 
-  seveDepartment( department): Observable<Departments> {
+  seveDepartment(department): Observable<Departments> {
     return this.http.post(`${this.API_URI}/departments`, department);
   }
 
   deleteDepartment(id: any) {
+    console.log(id);
     return this.http.delete(`${this.API_URI}/departments/${id}`);
   }
 

@@ -11,25 +11,36 @@
           </button>
             </div>
             <div class="modal-body">
-                <form [formGroup]="form">
+                <form [formGroup]="form" (ngSubmit)="saveDepartment()">
                     <div class="modal-body">
                         <div class="container-fluid">
                             <!--p>los campos con <span style="color: red">*</span> son obligatorios</p-->
                             <div class="form-group">
-                                <strong> Nombre del departamento <i style="color:red">*</i></strong>
-                                <input type="text" formControlName="nombreDepartamento" class="form-control" placeholder="Ej: Admisiones">
+                                <div>
+                                    <strong> Nombre del departamento <i style="color:red">*</i></strong>
+                                    <input type="text" formControlName="nombreDepartamento" class="form-control" placeholder="Ej: Admisiones" [ngClass]="{'is-invalid': submitted && f.nombreDepartamento.errors}" />
+                                    <div *ngIf="submitted && f.nombreDepartamento.errors" class="invalid-feedback">
+                                        Nombre departamento es requerido
+                                        <!--div *ngIf="form.controls.nombreDepartamento.errors.required">Nombre departamento es requerido</div-->
+                                    </div>
+                                </div>
 
                                 <br>
-
-                                <strong> Descripcion <i style="color:red">*</i></strong>
-                                <input type="text" formControlName="Descripcion" class="form-control" placeholder="Ej: ADM">
+                                <div>
+                                    <strong> Descripción <i style="color:red">*</i></strong>
+                                    <input type="text" formControlName="descripcion" class="form-control" placeholder="Ej: ADM" [ngClass]="{'is-invalid': submitted && f.descripcion.errors}" />
+                                    <div *ngIf="submitted && f.descripcion.errors" class="invalid-feedback">
+                                        descripción departamento es requerido
+                                        <!--div *ngIf="f.descripcion.errors.required">descripcion departamento es requerido</div-->
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary" (click)="saveDepartment()" data-dismiss="modal">Guardar</button>
+                        <button (click)="closeModal()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
                     </div>
                 </form>
             </div>
@@ -54,18 +65,20 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <strong> Nombre del departamento <i style="color:red">*</i></strong>
-                        <input type="text" name="Nombre" [ngModel]="department.nombreDepartamento" class="form-control">
+
+                        <input type="text" name="Nombre" [(ngModel)]="department.nombreDepartamento" class="form-control">
 
                         <br>
 
-                        <strong> Descripcion <i style="color:red">*</i></strong>
+                        <strong> Descripción <i style="color:red">*</i></strong>
                         <input type="text" name="Descripcion" [(ngModel)]="department.descripcion" class="form-control">
                     </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                    <button (click)="EditDepartment()" type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+
+                    <button (click)="closeModal()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button (click)="updateDepartment()" type="button" class="btn btn-primary">Aceptar</button>
                 </div>
             </form>
         </div>

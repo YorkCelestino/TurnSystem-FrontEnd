@@ -1,11 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter } from '@angular/core';
 import { DepartmentsService } from '../../services/departments.service';
 import Swal from 'sweetalert2';
 import { DepartmentsComponent } from '../../components/departments/departments.component';
 import { Router, Routes } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
-
-
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Departments } from 'src/app/models/departments';
 
 @Component({
   selector: 'app-register-departments',
@@ -15,66 +14,68 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 
 export class RegisterDepartmentsComponent implements OnInit {
   /*object for save departmens*/
-  @Input() department: {
-    id_Departamento: any;
-    nombreDepartamento: string;
-    descripcion: string;
-    estado: string;
-} ;
- public depart = {
-  id_Departamento: '',
-  nombreDepartamento: '',
-  descripcion: '',
-  estado: ''
-};
+  closeModalEvent = new EventEmitter<boolean>();
+
+  @Input() department: Departments;
+
   public form: FormGroup;
+  submitted = false;
+
   constructor(private departmentsService: DepartmentsService,
               private departmentsComponent: DepartmentsComponent,
               private router: Router,
               private fb: FormBuilder,
-    ) {
-      this.depart = this.department;
-      this.form = this.fb.group({
-        'nombreDepartamento' : '',
-        'descripcion': ''
-      });
-    }
+    ) {}
+
   ngOnInit() {
-  }
-
-  /*saving departments*/
-  saveDepartment() {
-    // delete this.department.Estado;
-    // delete this.department.Id_Departamento;
-     this.departmentsService.seveDepartment(this.form.value).subscribe(
-       res => {
-         console.log(this.form.value);
-          console.log(res);
-          this.form.reset();
-          this.departmentsComponent.getDepartments();
-          // this.router.navigate(['/departments']);
-       },
-       err => console.error(err)
-     );
-     Swal.fire({
-      type: 'success',
-      title: 'Automatic Turn System',
-      text: 'Departamento registrado con éxito!',
-      showConfirmButton: true,
-      confirmButtonColor: '#3085d6',
-      confirmButtonText: 'Aceptar',
+    this.form = this.fb.group({
+      nombreDepartamento: ['', Validators.required],
+      descripcion: ['', Validators.required]
     });
+
   }
+   // convenience getter for easy access to form fields
+   public get  f(): any {
+    return this.form.controls;
+   }
 
-  EditDepartment(Data) {
+  /* close modal*/
+  closeModal() {
+    this.departmentsComponent.getDepartments();
+    this.form.reset();
+    this.submitted = false;
+  }
+   /*saving department*/
+  saveDepartment() {
+      this.submitted = true;
+      if (this.form.invalid) {
+        return;
+      } else {
+         this.departmentsService.seveDepartment(this.form.value).subscribe(
+           res => {
+              this.form.reset();
+              this.departmentsComponent.getDepartments();
+           },
+           err => console.error(err)
+         );
+         Swal.fire({
+          type: 'success',
+          title: 'Automatic Turn System',
+          text: 'Departamento registrado con éxito!',
+          showConfirmButton: true,
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Aceptar',
+        });
+    }
+    }
 
+  updateDepartment() {
+     console.log(this.department.id_Departamento);
     Swal.fire({
       title: 'Automatic Turn System',
       text: '¿ Estás seguro que desea actualizar este departamento ?',
       type: 'info',
       showCancelButton: true,
-      // confirmButtonColor: '#3085d6',
-      // cancelButtonColor: '#d33',
       cancelButtonText: 'Cancelar',
       confirmButtonText: 'Actualizar',
       reverseButtons: true
@@ -97,3 +98,4 @@ export class RegisterDepartmentsComponent implements OnInit {
   });
   }
 }
+

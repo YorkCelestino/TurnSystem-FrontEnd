@@ -4,6 +4,7 @@ import { UsersService } from '../../services/users.service';
 import { User } from '../../models/users';
 import Swal from 'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
+import { Subject } from 'rxjs';
 
 
 @Component({
@@ -15,11 +16,12 @@ export class UsersComponent implements OnInit {
   /*users array*/
   users: any = [];
   selected: any;
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
 
   constructor(private usersService: UsersService,
               private activatedRoute: ActivatedRoute
     ) {
-    this.getUsers();
   }
 
   toggleModal (data: any) {
@@ -28,6 +30,13 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit () {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      // pageLength: 5,
+       retrieve: true,
+      // paging: false
+    };
+    this.getUsers();
   }
 
     /*getting users*/
@@ -35,6 +44,8 @@ export class UsersComponent implements OnInit {
       this.usersService.getUsers().subscribe(
         res => {
           this.users = res;
+          // Calling the DT trigger to manually render the table
+          this.dtTrigger.next();
         },
         err => console.error(err)
       );

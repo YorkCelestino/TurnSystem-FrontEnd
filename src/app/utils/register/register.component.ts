@@ -4,7 +4,7 @@ import { Listdepartment, UserSave, User } from '../../models/users';
 import { UsersComponent } from '../../components/users/users.component';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -12,13 +12,16 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  listaNombreDepartamento: any = []; /*Array name of departments */
-  @Input() user: User;
+
+  listaNombreDepartamento: Listdepartment; /*Array name of departments */
+  @Input() user:  UserSave;
   public form: FormGroup;
+  selected: any;
+  submitted = false;
 
   IDdeparment: Listdepartment = {
     Id_departamento: 0 ,
-     nombreDepartamento: '',
+    nombreDepartamento: '',
   };
   // department: number;
   constructor( private usersService: UsersService,
@@ -26,21 +29,38 @@ export class RegisterComponent implements OnInit {
               private router: Router,
               private fb: FormBuilder,
     ) {
-
-    this.getNameDepartments();
-
-      this.form = this.fb.group({
-        Id_Usuario: 0,
-        'nombre': '',
-        'apellido' : '',
-        'cedula' : '',
-        'usuarios' : '',
-        'password': '',
-        'Id_departamento': ''
-      });
+      this.getNameDepartments();
   }
+
+  toggleModal (data: any) {
+    this.selected = data;
+  }
+
   ngOnInit() {
+    this.form = this.fb.group({
+      Id_Usuario: [0, Validators.required],
+      nombre: ['', Validators.required],
+      apellido :  ['', Validators.required],
+      cedula :  ['', Validators.required],
+      usuarios : ['', Validators.required],
+      password:  ['', Validators.required],
+      Id_departamento: [10, Validators.required],
+      role: ['', Validators.required]
+    });
   }
+
+    // convenience getter for easy access to form fields
+    public get  f(): any {
+      return this.form.controls;
+    }
+
+    /* close modal*/
+  closeModal() {
+   this.usersComponent.getUsers();
+    this.form.reset();
+    this.submitted = false;
+  }
+
   /*getting name of departments */
   getNameDepartments() {
     this.usersService.getNameDeparment().subscribe(
@@ -50,13 +70,15 @@ export class RegisterComponent implements OnInit {
       err => console.log(err)
      );
   }
-/*adding user */
-  saveNewUser() {
-    // delete this.user.Id_Usuario;
-    // delete this.user.Estado;
+
+  /*adding user */
+  saveUser() {
+    this.submitted = true;
+    if (this.form.invalid) {
+      return;
+    } else {
     this.usersService.saveUser(this.form.value).subscribe(
       res => {
-        console.log(this.form.value);
         this.form.reset();
         this.usersComponent.getUsers();
       },
@@ -71,8 +93,16 @@ export class RegisterComponent implements OnInit {
       confirmButtonText: 'Aceptar',
     });
   }
+}
 
-  editUser(id: any) {
-      console.log(id);
+  updateUser() {
+     this.usersService.updateUser(this.user.Id_Usuario , this.user)
+     .subscribe(
+       res => {
+         console.log(res);
+         this.usersComponent.getUsers();
+       },
+       err => {console.log(err); }
+     );
   }
 }

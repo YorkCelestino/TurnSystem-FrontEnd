@@ -10,7 +10,6 @@ export class TurnsComponent implements OnInit {
 
   constructor(@Inject(DOCUMENT) private document: any) {}
   elem;
-
   ngOnInit() {
     this.elem = document.documentElement;
   }

@@ -1,0 +1,49 @@
+@font-face {
+    font-family: Poppins-Bold;
+    src: url('src/assets/fonts/poppins/Poppins-Bold.ttf');
+}
+
+strong p {
+    /* margin-top: 2em; */
+    font-family: Poppins-Bold;
+    font-size: 29px;
+}
+
+.diseño-titulos {
+    font-family: Poppins-Bold;
+    font-size: 35px;
+}
+
+
+/**
+* Buttons
+*/
+
+.btn {
+    background: #018db8;
+    color: #ffffff;
+    display: inline-block;
+    margin: 10px;
+    padding: 13px 0px;
+    text-align: center;
+    width: 346px;
+    text-decoration: none;
+    box-shadow: 0px 3px 0px #373c3c;
+    font-family: Poppins-Bold;
+}
+
+.btn span {
+    font-size: 25px;
+    color: #ffffff;
+}
+
+.btn.radio {
+    border-radius: 10px;
+}
+
+
+/*efecto de los botones*/
+
+.btn:hover {
+    box-shadow: 0px 0px 0px;
+}

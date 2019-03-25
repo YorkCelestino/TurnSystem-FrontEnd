@@ -5,24 +5,21 @@
                 <div class="row">
                     <div class="col diseño-titulos mt-3">
                         <i class="fa fa-users "></i> Lista de usuarios
-
                     </div>
-
                     <!-- Button trigger modal -->
                     <div class="d-flex bd-highlight mb-3 col">
                         <div class="ml-auto mr-3 mt-1 p-2 bd-highlight">
-                            <button type="button" class="btn btn-outline-primary btn-lg mr-aurto" data-toggle="modal" data-target="#modelId">
+                            <button type="button" class="btn btn-outline-primary btn-lg mr-aurto" data-toggle="modal" data-target="#saveUser">
                                 <i class="fa fa-user-plus"></i>
                             </button>
-                            <app-register></app-register>
+                            <app-register [user]="selected"></app-register>
                         </div>
                     </div>
+
                 </div>
                 <hr class="mt-auto">
-
-
                 <div class="container-fluid">
-                    <table datatable class="row-border hover">
+                    <table datatable class="row-border hover" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -37,18 +34,21 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let user of users">
-                                <td>{{user.id_Usuario}}</td>
+                                <td>{{user.Id_Usuario}}</td>
                                 <td>{{user.nombre}}</td>
-                                <td>{{user.apellido }} </td>
-                                <td>{{user.cedula }} </td>
-                                <td>{{user.usuarios}} </td>
-                                <td>{{user.nombreDepartamento}} </td>
-                                <td>{{user.estado }} </td>
+                                <td>{{user.apellido }}</td>
+                                <td>{{user.cedula }}</td>
+                                <td>{{user.usuarios}}</td>
+                                <td>{{user.nombreDepartamento}}</td>
+                                <td>{{user.Estado}}</td>
                                 <td>
-                                    <button data-toggle="modal" data-target="#editUser" (click)="toggleModal(user)" type="button" title="Editar" class="btn btn-outline-warning">
-                                        <i class="fa fa-edit" style="color:orange;"></i>
+
+                                    <!-- Button trigger modal -->
+                                    <button (click)="toggleModal(user)" type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#editUser">
+                                            <i class="fa fa-edit" style="color:orange;"></i>
                                     </button>
-                                    <button (click)="deleteUser(user.Id_Usuario);" type="button" title="Borrar" class="btn btn-outline-danger" style="margin-left: 2px;">
+
+                                    <button (click)="deleteUser(user.Id_Usuario)" type="button" title="Borrar" class="btn btn-outline-danger" style="margin-left: 2px;">
                                         <i class="fa fa-trash" style="color:red;"></i>
                                     </button>
 
