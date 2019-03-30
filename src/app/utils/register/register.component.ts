@@ -4,7 +4,7 @@ import { Listdepartment, UserSave, User } from '../../models/users';
 import { UsersComponent } from '../../components/users/users.component';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -16,11 +16,12 @@ export class RegisterComponent implements OnInit {
   listaNombreDepartamento: Listdepartment; /*Array name of departments */
   @Input() user:  UserSave;
   public form: FormGroup;
+  // f;
   selected: any;
   submitted = false;
 
   IDdeparment: Listdepartment = {
-    Id_departamento: 0 ,
+    id_Departamento: 0 ,
     nombreDepartamento: '',
   };
   // department: number;
@@ -37,6 +38,9 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+  setForm() {
+   // console.log(this.listaNombreDepartamento[0]);
     this.form = this.fb.group({
       Id_Usuario: [0, Validators.required],
       nombre: ['', Validators.required],
@@ -44,12 +48,13 @@ export class RegisterComponent implements OnInit {
       cedula :  ['', Validators.required],
       usuarios : ['', Validators.required],
       password:  ['', Validators.required],
-      Id_departamento: [10, Validators.required],
+      id_Departamento: [ this.listaNombreDepartamento[0].Id_departamento, Validators.required],
       role: ['', Validators.required]
     });
+    // this.f = this.form.controls;
   }
 
-    // convenience getter for easy access to form fields
+   // convenience getter for easy access to form fields
     public get  f(): any {
       return this.form.controls;
     }
@@ -66,6 +71,7 @@ export class RegisterComponent implements OnInit {
     this.usersService.getNameDeparment().subscribe(
       res => {
         this.listaNombreDepartamento = res;
+        this.setForm();
       },
       err => console.log(err)
      );
@@ -75,24 +81,25 @@ export class RegisterComponent implements OnInit {
   saveUser() {
     this.submitted = true;
     if (this.form.invalid) {
+      console.log(this.form.value);
       return;
     } else {
-    this.usersService.saveUser(this.form.value).subscribe(
-      res => {
-        this.form.reset();
-        this.usersComponent.getUsers();
-      },
-      err => console.error(err)
-    );
-    Swal.fire({
-      type: 'success',
-      title: 'Automatic Turn System',
-      text: 'Ususario registrado con éxito',
-      showConfirmButton: true,
-      confirmButtonColor: '#3085d6',
-      confirmButtonText: 'Aceptar',
-    });
-  }
+       this.usersService.saveUser(this.form.value).subscribe(
+          res => {
+            this.form.reset();
+            this.usersComponent.getUsers();
+            Swal.fire({
+              type: 'success',
+              title: 'Automatic Turn System',
+              text: 'Ususario registrado con éxito',
+              showConfirmButton: true,
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Aceptar',
+            });
+          },
+          err => console.error(err)
+        );
+    }
 }
 
   updateUser() {

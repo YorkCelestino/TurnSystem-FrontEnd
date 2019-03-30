@@ -9,7 +9,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form [formGroup]="form" (ngSubmit)="saveUser()">
+            <form *ngIf="form" [formGroup]="form" (ngSubmit)="saveUser()">
                 <div class="modal-body ">
                     <div class="container-fluid ">
 
@@ -44,26 +44,29 @@
                             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                                 Contraseña es requerido
                             </div>
+                            <div *ngIf="submitted && f.password.errors?.minLength" class="invalid-feedback">
+                                La Contraseña es muy corta
+                            </div>
 
                             <!--strong> Confiarmar Contraseña: <i style="color:red ">*</i></strong>
                             <input type="password " name="contraseña2 " class="form-control " value=" " placeholder="Confiarmar Contraseña "-->
 
                             <label for="department "> <strong>Departamento <i style="color:red ">*</i></strong></label>
 
-                            <!--select id="department " name="department " formControlName="Id_departamento" class="form-control " [ngClass]="{'is-invalid': submitted && f.Id_departamento.errors}">
-                                 <option *ngFor="let nombreDepartamento of listaNombreDepartamento " [value]="nombreDepartamento.Id_departamento ">
+                            <select id="department " name="department " [minlength]="'6'" formControlName="id_Departamento" class="form-control " [ngClass]="{'is-invalid': submitted && f.Id_departamento.errors}">
+                                 <option *ngFor="let nombreDepartamento of listaNombreDepartamento" [value]="nombreDepartamento.Id_departamento">
                                      {{nombreDepartamento.nombreDepartamento}}
                                 </option>
                             </select>
                             <label for="department "> <strong>Tipo de usuario: <i style="color:red ">*</i></strong></label><br>
-                            <input type="radio" name="gender" value="male"> Administrador<br>
-                            <input type="radio" name="gender" value="female"> Recepcionista <br>
-                            <input type="radio" name="gender" value="other"> Otros-->
+                            <input type="radio" name="role" formControlName="role" value="1"> Administrador<br>
+                            <input type="radio" name="role" formControlName="role" value="2"> Recepcionista <br>
+                            <input type="radio" name="role" formControlName="role" value="3"> Otros
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer ">
-                    <button type="button " class="btn btn-secondary " data-dismiss="modal " ngc>Cerrar</button>
+                    <button type="button " class="btn btn-secondary " data-dismiss="modal ">Cerrar</button>
                     <button type="submit " class="btn btn-primary ">Guardar</button>
                 </div>
             </form>
@@ -74,7 +77,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="editUser" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+<!-- <div class="modal fade" id="editUser" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -110,4 +113,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

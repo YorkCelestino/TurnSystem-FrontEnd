@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
-import { TextMaskModule } from 'angular2-text-mask';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PersonService } from 'src/app/services/person.service';
 import { jsonpCallbackContext } from '@angular/common/http/src/module';
@@ -12,9 +11,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./matricula.component.css']
 })
  export class MatriculaComponent implements OnInit {
-  @ViewChild ('screenValue') screenValue: ElementRef;
+   buttons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
   submitted = false;
-   mask = [ /[1-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/];
+  // mask = [ /[1-9]/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/, /\d/];
    form: FormGroup;
   constructor(private fb: FormBuilder,
               private personService: PersonService,
@@ -25,7 +24,6 @@ import { Router } from '@angular/router';
     this.form = this.fb.group({
       identificador: ['', Validators.required]
     });
-    this.screenValue.nativeElement.focus();
   }
 
    // convenience getter for easy access to form fields
@@ -52,12 +50,14 @@ import { Router } from '@angular/router';
  */
   buttonsValues(value: number) {
     // tslint:disable-next-line:prefer-const
-    let last = this.screenValue.nativeElement.value;
+    let last = this.form.value.identificador;
     if (last.length > 7 ) {
         return;
     }
-    this.screenValue.nativeElement.focus();
-     this.screenValue.nativeElement.value = last + value;
+  // this.screenValue.nativeElement.focus();
+     this.form.patchValue({
+       identificador: last + value
+     });
   }
 
   /**
@@ -65,12 +65,14 @@ import { Router } from '@angular/router';
   */
   deleteLast() {
     // tslint:disable-next-line:prefer-const
-    let last = this.screenValue.nativeElement.value;
+    let last = this.form.value.identificador;
 
     // tslint:disable-next-line:prefer-const
     let newValue = last.substring(0, last.length - 1);
 
-    this.screenValue.nativeElement.value = newValue;
+    this.form.patchValue({
+      identificador: newValue
+    });
   }
 
   addPerson() {
@@ -79,15 +81,16 @@ import { Router } from '@angular/router';
       console.log(this.form.value);
       return;
     } else {
-      this.personService.saveUser(this.form.value).subscribe(
-        res => {
-          console.log(res);
-          this.router.navigateByUrl('/turns/motivoTurno');
-         },
-        err => {
-          console.log(err);
-        }
-      );
+      console.log(this.form.value);
+      // this.personService.saveUser(this.form.value).subscribe(
+      //   res => {
+      //     console.log(res);
+      //     this.router.navigateByUrl('/turns/motivoTurno');
+      //    },
+      //   err => {
+      //     console.log(err);
+      //   }
+      // );
     }
   }
 }

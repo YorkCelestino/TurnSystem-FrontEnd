@@ -21,6 +21,6 @@ export interface UserSave {
 }
 
 export interface Listdepartment {
-    Id_departamento?: any;
+    id_Departamento?: any;
     nombreDepartamento?: string;
 }

@@ -51,7 +51,7 @@ export class UsersComponent implements OnInit {
       );
     }
 
-    deleteUser(id: Number | string) {
+    changeStatus() {
       Swal.fire({
         title: 'Automatic Turn System',
         text: '¿ Estás seguro que desea Deshabilitar este Usuario?',
@@ -64,17 +64,19 @@ export class UsersComponent implements OnInit {
         reverseButtons: true
       }).then((result) => {
         if (result.value) {
-          Swal.fire(
-            'Automatic Turn System!',
-            '¡Deshabilitado con éxito!',
-            'success'
-          );
-          this.usersService.deleteUser(id).subscribe(
-            res => {
+
+          this.usersService.changeStatusUser(this.users.id_Usuario).subscribe(
+              res => {
                 console.log(res);
+                Swal.fire(
+                  'Automatic Turn System!',
+                  '¡Deshabilitado con éxito!',
+                  'success'
+                );
                 this.getUsers();
+
             },
-            err => console.log(err)
+            err => { console.log(err); }
           );
         }
       });

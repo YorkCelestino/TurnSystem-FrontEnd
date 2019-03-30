@@ -6,7 +6,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UtilsRoutingModule } from './utils-routing.module';
-import { TextMaskModule } from 'angular2-text-mask';
 
 /**
  *components
@@ -43,7 +42,6 @@ import { MotivoTurnoComponent } from './utilsTurnComponents/motivo-turno/motivo-
     FormsModule,
     ReactiveFormsModule,
     UtilsRoutingModule,
-    TextMaskModule
   ],
   exports: [
     RegisterComponent,

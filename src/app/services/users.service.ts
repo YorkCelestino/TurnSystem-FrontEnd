@@ -33,8 +33,8 @@ export class UsersService {
   }
 
   // change Status of one User
-  deleteUser(id: any) {
-    return this.http.delete(environment.apiBaseUrl + '/users/delete-user', { params: {id}});
+  changeStatusUser(id: number) {
+    return this.http.post(environment.apiBaseUrl + '/users/delete-user/', { params: {id}});
   }
 
   // Updating User

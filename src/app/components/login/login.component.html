@@ -18,9 +18,9 @@
                     <label class="validation-message">Usuario incrrecto</label>
                 </div>
                 <input type="password" name="password" #password="ngModel" [(ngModel)]="model.password" placeholder="Contraseña" required minlength="4" [ngClass]="{'invalid-textbox' :signInForm.submitted && !password.valid }">
-                <!--div *ngIf="signInForm.submitted && password.errors?.minlength">
-                <label class="validation-message">Minimum 4 characters.</label>
-                </div-->
+                <div *ngIf="signInForm.submitted && password.errors?.minlength">
+                    <label class="validation-message">Minimo 4 caracteres.</label>
+                </div>
                 <br>
                 <br>
 
