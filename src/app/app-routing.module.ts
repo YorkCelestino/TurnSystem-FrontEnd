@@ -21,6 +21,10 @@ import { MatriculaComponent } from './utils/utilsTurnComponents/matricula/matric
 import { OptionsComponent } from './utils/utilsTurnComponents/options/options.component';
 import { CedulaComponent } from './utils/utilsTurnComponents/cedula/cedula.component';
 import { MotivoTurnoComponent } from './utils/utilsTurnComponents/motivo-turno/motivo-turno.component';
+import { InfoInstitutionComponent } from './utils/utilsConfigComponents/info-institution/info-institution.component';
+import { InfoMultimediaComponent } from './utils/utilsConfigComponents/info-multimedia/info-multimedia.component';
+import { DepartmentTurnoComponent } from './utils/utilsTurnComponents/department-turno/department-turno.component';
+import { MotivosComponent } from './components/motivos/motivos.component';
 
 const routes: Routes = [
   { path: '',
@@ -34,28 +38,32 @@ const routes: Routes = [
       path: 'configuration', component: ConfigurationComponent,
       children: [
         {
-          path: 'infoInstitution', loadChildren: './utils/utils.module#UtilsModule'
+          path: 'infoInstitution' , component: InfoInstitutionComponent
+         // path: 'infoInstitution', loadChildren: './utils/utils.module#UtilsModule'
         },
         {
-          path: 'InfoMultimedia', loadChildren: './utils/utils.module#UtilsModule'
+          path: 'infoMultimedia', component: InfoMultimediaComponent
+          // path: 'infoMultimedia', loadChildren: './utils/utils.module#UtilsModule'
         }
       ]
     },
     {
       path: 'departments', component: DepartmentsComponent
     },
+    {path: 'motivos', component: MotivosComponent},
     {path: 'users', component: UsersComponent},
     {path: 'report', component: ReportsComponent},
   ]
 },
 
-  {path: 'espera',  canActivate: [AuthGuard], component: EsperaComponent},
+{path: 'espera',  canActivate: [AuthGuard], component: EsperaComponent},
 
   {path: 'turns', canActivate: [AuthGuard], component: TurnsComponent,
     children: [
       {path: 'options', component: OptionsComponent},
       {path: 'matricula', component: MatriculaComponent },
       {path: 'cedula', component: CedulaComponent},
+      {path: 'departmentTurno', component: DepartmentTurnoComponent},
       {path: 'motivoTurno', component: MotivoTurnoComponent}
     ]
   },

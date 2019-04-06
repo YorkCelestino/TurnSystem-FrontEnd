@@ -33,13 +33,17 @@ export class UsersService {
   }
 
   // change Status of one User
-  changeStatusUser(id: number) {
-    return this.http.post(environment.apiBaseUrl + '/users/delete-user/', { params: {id}});
+  changeStatusUser(id: number, status: string) {
+    console.log(id);
+    return this.http.post(environment.apiBaseUrl + '/users/delete-user/', {
+      id,
+      status: (status === 'A') ? 'I' : 'A'
+    });
   }
 
   // Updating User
   updateUser(id: any , updatedUser: UserSave): Observable<UserSave> {
-    return this.http.post(environment.apiBaseUrl + '/users/update-user/' + id, updatedUser);
+    return this.http.post(environment.apiBaseUrl + '/users/update-user/', updatedUser);
 
   }
 }

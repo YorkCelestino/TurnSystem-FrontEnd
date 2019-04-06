@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { InfoInstitutionService } from 'src/app/services/info-institution.service';
+import { InfoInstitucion } from 'src/app/models/infoinstitucion';
 
 @Component({
   selector: 'app-info-institution',
@@ -7,9 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InfoInstitutionComponent implements OnInit {
 
-  constructor() { }
+  infoinstitucion: InfoInstitucion;
+  selected: InfoInstitucion;
+  constructor( private  infoInstitutionService: InfoInstitutionService) {
+
+    this.getInfoInstitution();
+   }
 
   ngOnInit() {
+  }
+
+  getInfoInstitution() {
+    this.infoInstitutionService.getInfoInstition()
+    .subscribe(
+      res => {
+        this.infoinstitucion = res;
+          // console.log(res);
+      },
+      err => console.log(err),
+    );
+  }
+
+  toggleModal(data: any) {
+    this.selected = data;
   }
 
 }

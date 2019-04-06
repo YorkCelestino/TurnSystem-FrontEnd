@@ -9,10 +9,11 @@
                     <!-- Button trigger modal -->
                     <div class="d-flex bd-highlight mb-3 col">
                         <div class="ml-auto mr-3 mt-1 p-2 bd-highlight">
-                            <button type="button" class="btn btn-outline-primary btn-lg mr-aurto" data-toggle="modal" data-target="#saveUser">
+                            <button type="button" (click)="toggleAdd = !toggleAdd" class="btn btn-outline-primary btn-lg mr-aurto">
                                 <i class="fa fa-user-plus"></i>
                             </button>
-                            <app-register [user]="selected"></app-register>
+                            <app-register (onClose)="onClose($event)" *ngIf="toggleEdit" [user]="selected"></app-register>
+                            <app-register (onClose)="onClose($event)" *ngIf="toggleAdd"></app-register>
                         </div>
                     </div>
 
@@ -37,18 +38,18 @@
                                 <td>{{user.Id_Usuario}}</td>
                                 <td>{{user.nombre}}</td>
                                 <td>{{user.apellido }}</td>
-                                <td>{{user.cedula }}</td>
+                                <td mask="000-0000000-0">{{user.cedula }}</td>
                                 <td>{{user.usuarios}}</td>
                                 <td>{{user.nombreDepartamento}}</td>
                                 <td>{{user.Estado}}</td>
                                 <td>
 
                                     <!-- Button trigger modal -->
-                                    <button (click)="toggleModal(user)" type="button" class="btn btn-outline-warning" data-toggle="modal" data-target="#editUser">
+                                    <button (click)="toggleModal(user)" type="button" class="btn btn-outline-warning">
                                             <i class="fa fa-edit" style="color:orange;"></i>
                                     </button>
 
-                                    <button (click)="changeStatus()" type="button" title="Borrar" class="btn btn-outline-danger" style="margin-left: 2px;">
+                                    <button (click)="changeStatus(user.Id_Usuario, user.Estado)" type="button" title="Borrar" class="btn btn-outline-danger" style="margin-left: 2px;">
                                         <i class="fa fa-trash" style="color:red;"></i>
                                     </button>
 

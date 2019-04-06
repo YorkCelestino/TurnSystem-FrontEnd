@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Motivos } from 'src/app/models/motivos';
+import { MotivosService } from 'src/app/services/motivos.service';
 import { Departments } from 'src/app/models/departments';
-import { DepartmentsService } from 'src/app/services/departments.service';
+import { TurnsService } from 'src/app/services/turns.service';
+import { Turns } from 'src/app/models/turns';
 
 @Component({
   selector: 'app-motivo-turno',
@@ -8,15 +11,40 @@ import { DepartmentsService } from 'src/app/services/departments.service';
   styleUrls: ['./motivo-turno.component.css']
 })
 export class MotivoTurnoComponent implements OnInit {
-  listDepartments: Departments;
-  constructor(private departmentsService: DepartmentsService) { }
+  listMotivo: Motivos;
+  constructor(private motivosService: MotivosService, protected turnsService: TurnsService) { }
+
+  @Input() department: Departments;
 
   ngOnInit() {
-    this.departmentsService.getdepartments()
+    this.getMotivos();
+  }
+
+  getMotivos() {
+    console.log(this.department.id_Departamento );
+    this.motivosService.getMotivo(this.department.id_Departamento)
     .subscribe(
-      res => { this.listDepartments = res; },
-      err => {console.log(err); }
+      res => {
+        this.listMotivo = res;
+      },
+      err => {
+        console.log(err);
+      }
     );
+  }
+
+  setTurno(motivos: any) {
+      delete motivos.descripcion;
+      delete motivos.id_Departamento;
+      this.turnsService.saveTurn(motivos)
+      .subscribe(
+        res => {
+          console.log(res);
+        },
+        err => {
+          console.error(err);
+        }
+      );
   }
 
 }

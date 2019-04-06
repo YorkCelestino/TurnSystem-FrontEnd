@@ -1,10 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { UsersService } from '../../services/users.service';
 import { Listdepartment, UserSave, User } from '../../models/users';
 import { UsersComponent } from '../../components/users/users.component';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+
+declare const $: any;
 
 @Component({
   selector: 'app-register',
@@ -15,6 +17,8 @@ export class RegisterComponent implements OnInit {
 
   listaNombreDepartamento: Listdepartment; /*Array name of departments */
   @Input() user:  UserSave;
+  // tslint:disable-next-line:no-output-on-prefix
+  @Output() onClose = new EventEmitter<any>();
   public form: FormGroup;
   // f;
   selected: any;
@@ -38,19 +42,39 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    $('#userModal').modal('show');
+    $('#userModal').on('hidden.bs.modal', this.closed);
+  }
+
+  closed() {
+    // console.log('is closed')
+    this.onClose.emit({status: 'closed'});
   }
   setForm() {
    // console.log(this.listaNombreDepartamento[0]);
-    this.form = this.fb.group({
-      Id_Usuario: [0, Validators.required],
-      nombre: ['', Validators.required],
-      apellido :  ['', Validators.required],
-      cedula :  ['', Validators.required],
-      usuarios : ['', Validators.required],
-      password:  ['', Validators.required],
-      id_Departamento: [ this.listaNombreDepartamento[0].Id_departamento, Validators.required],
-      role: ['', Validators.required]
+   if (this.user) {
+      this.form = this.fb.group({
+      Id_Usuario: [this.user.Id_Usuario, Validators.required],
+      nombre: [this.user.nombre, Validators.required],
+      apellido :  [this.user.apellido, Validators.required],
+      cedula :  [this.user.cedula, Validators.required],
+      usuarios : [this.user.usuarios, Validators.required],
+      id_Departamento: [ this.user.id_Departamento, Validators.required],
+      role: [this.user.role, Validators.required]
     });
+   } else {
+
+     this.form = this.fb.group({
+       Id_Usuario: [0, Validators.required],
+       nombre: ['', Validators.required],
+       apellido :  ['', Validators.required],
+       cedula :  ['', Validators.required],
+       usuarios : ['', Validators.required],
+       password:  ['', Validators.required],
+       id_Departamento: [ this.listaNombreDepartamento[0].Id_departamento, Validators.required],
+       role: ['', Validators.required]
+     });
+   }
     // this.f = this.form.controls;
   }
 
@@ -81,7 +105,6 @@ export class RegisterComponent implements OnInit {
   saveUser() {
     this.submitted = true;
     if (this.form.invalid) {
-      console.log(this.form.value);
       return;
     } else {
        this.usersService.saveUser(this.form.value).subscribe(
@@ -103,7 +126,7 @@ export class RegisterComponent implements OnInit {
 }
 
   updateUser() {
-     this.usersService.updateUser(this.user.Id_Usuario , this.user)
+     this.usersService.updateUser(this.user.Id_Usuario , this.form.value)
      .subscribe(
        res => {
          console.log(res);

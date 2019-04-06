@@ -91,6 +91,7 @@ export class RegisterDepartmentsComponent implements OnInit {
           res => {
             console.log (res);
             this.departmentsComponent.getDepartments();
+            this.form.reset();
           },
           err => console.error(err)
         );

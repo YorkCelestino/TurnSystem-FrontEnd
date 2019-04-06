@@ -15,6 +15,8 @@ import { Subject } from 'rxjs';
 export class UsersComponent implements OnInit {
   /*users array*/
   users: any = [];
+  toggleEdit = false;
+  toggleAdd = false;
   selected: any;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -26,9 +28,14 @@ export class UsersComponent implements OnInit {
 
   toggleModal (data: any) {
     this.selected = data;
-    console.log(this.selected);
+    this.toggleEdit = !this.toggleEdit;
   }
 
+  onClose(event: any) {
+    console.log(event);
+    this.toggleEdit = false;
+    this.toggleAdd = false;
+  }
   ngOnInit () {
     this.dtOptions = {
       pagingType: 'full_numbers',
@@ -51,7 +58,7 @@ export class UsersComponent implements OnInit {
       );
     }
 
-    changeStatus() {
+    changeStatus(id, status) {
       Swal.fire({
         title: 'Automatic Turn System',
         text: '¿ Estás seguro que desea Deshabilitar este Usuario?',
@@ -65,7 +72,7 @@ export class UsersComponent implements OnInit {
       }).then((result) => {
         if (result.value) {
 
-          this.usersService.changeStatusUser(this.users.id_Usuario).subscribe(
+          this.usersService.changeStatusUser(id, status).subscribe(
               res => {
                 console.log(res);
                 Swal.fire(

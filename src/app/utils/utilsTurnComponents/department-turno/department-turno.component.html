@@ -1,0 +1,20 @@
+<br>
+<br>
+<br>
+<div class="text-center">
+    <div class="diseño-titulos">
+        <span *ngIf="!selected">Selecionar Departamento</span>
+        <span *ngIf="selected">Selecionar Motivo</span>
+    </div>
+    <div class="mt-4">
+        <div *ngIf="!selected">
+            <button *ngFor="let department of listDepartments" (click)="setDepartment(department)" class="btn btn-primary ml-4">
+                {{department.nombreDepartamento}}
+            </button>
+        </div>
+        <div *ngIf="selected">
+            <app-motivo-turno [department]="selected"></app-motivo-turno>
+        </div>
+    </div>
+
+</div>

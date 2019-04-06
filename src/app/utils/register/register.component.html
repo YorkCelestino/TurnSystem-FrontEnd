@@ -1,10 +1,10 @@
-<!-- Modal -->
-<div class="modal fade" id="saveUser" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+<!-- Modal Save-->
+<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="false">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
 
             <div class="modal-header">
-                <h5 class="modal-title"><i class="fa fa-user-plus"></i> Registrar Usuarios</h5>
+                <h5 class="modal-title"><i class="fa fa-user-plus"></i><span *ngIf="user">Editar</span> <span *ngIf="!user">Registrar</span> Usuario</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -28,7 +28,7 @@
                             </div>
 
                             <strong> Cedula <i style="color:red ">*</i></strong>
-                            <input type="text" name="cedula" formControlName="cedula" class="form-control " value="" placeholder="Cedula" [ngClass]="{'is-invalid': submitted && f.cedula.errors}" />
+                            <input mask="000-0000000-0" type="text" name="cedula" formControlName="cedula" class="form-control " value="" placeholder="Cedula" [ngClass]="{'is-invalid': submitted && f.cedula.errors}" />
                             <div *ngIf="submitted && f.cedula.errors" class="invalid-feedback">
                                 Cedula es requerido
                             </div>
@@ -39,13 +39,15 @@
                                 Usuario es requerido
                             </div>
 
-                            <strong> Contraseña <i style="color:red ">*</i></strong>
-                            <input type="password" name="contraseña" formControlName="password" class="form-control " value="" placeholder="contraseña" [ngClass]="{'is-invalid': submitted && f.password.errors}" />
-                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                                Contraseña es requerido
-                            </div>
-                            <div *ngIf="submitted && f.password.errors?.minLength" class="invalid-feedback">
-                                La Contraseña es muy corta
+                            <div *ngIf="!user">
+                                <strong> Contraseña <i style="color:red ">*</i></strong>
+                                <input type="password" name="contraseña" formControlName="password" class="form-control " value="" placeholder="contraseña" [ngClass]="{'is-invalid': submitted && f.password.errors}" />
+                                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                    Contraseña es requerido
+                                </div>
+                                <div *ngIf="submitted && f.password.errors?.minLength" class="invalid-feedback">
+                                    La Contraseña es muy corta
+                                </div>
                             </div>
 
                             <!--strong> Confiarmar Contraseña: <i style="color:red ">*</i></strong>
@@ -66,8 +68,9 @@
                     </div>
                 </div>
                 <div class="modal-footer ">
-                    <button type="button " class="btn btn-secondary " data-dismiss="modal ">Cerrar</button>
-                    <button type="submit " class="btn btn-primary ">Guardar</button>
+                    <button type="button " class="btn btn-secondary " data-dismiss="modal">Cerrar</button>
+                    <button *ngIf="!user" type="submit " class="btn btn-primary ">Guardar</button>
+                    <button *ngIf="user" (click)="updateUser()" type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
                 </div>
             </form>
 
@@ -76,7 +79,7 @@
 </div>
 
 
-<!-- Modal -->
+<!-- Modal edit-->
 <!-- <div class="modal fade" id="editUser" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -101,15 +104,20 @@
 
                 <label for="department "> <strong>Departamento <i style="color:red ">*</i></strong></label>
 
-                <select id="department" name="department" [(ngModel)]="listaNombreDepartamento.Id_departamento" class="form-control " [ngClass]="{'is-invalid': submitted && f.Id_departamento.errors}">
-                     <option *ngFor="let nombreDepartamentos of listaNombreDepartamento" [value]="nombreDepartamentos.Id_departamento">
-                         {{nombreDepartamentos.nombreDepartamento}}
-                    </option>
-                </select>
+                <select id="department " name="department " class="form-control " [ngClass]="{'is-invalid': submitted && f.Id_departamento.errors}">
+                    <option *ngFor="let nombreDepartamento of listaNombreDepartamento" [value]="nombreDepartamento.Id_departamento" [(ngModel)]="user.id_departamento">
+                        {{nombreDepartamento.nombreDepartamento}}
+                   </option>
+               </select>
+                <label for="department "> <strong>Tipo de usuario: <i style="color:red ">*</i></strong></label><br>
+                <input type="radio" name="role" [(ngModel)]="user.role" value="1"> Administrador<br>
+                <input type="radio" name="role" [(ngModel)]="user.role" value="2"> Recepcionista <br>
+                <input type="radio" name="role" [(ngModel)]="user.role" value="3"> Otros
+
             </div>
             <div class="modal-footer">
                 <button (click)="closeModal()" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button (click)="updateUser()" type="button" class="btn btn-primary">Guardar</button>
+                
             </div>
         </div>
     </div>

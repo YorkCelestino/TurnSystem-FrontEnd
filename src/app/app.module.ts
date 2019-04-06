@@ -34,6 +34,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { UserServiceLogin } from './auth/user.service';
 import { AuthGuard } from './auth/auth.guard';
 import { FormsModule } from '@angular/forms';
+import { MotivosComponent } from './components/motivos/motivos.component';
 
 
 
@@ -53,6 +54,7 @@ import { FormsModule } from '@angular/forms';
     ProfileComponent,
     AboutComponent,
     StartComponent,
+    MotivosComponent,
   ],
   imports: [
     BrowserModule,

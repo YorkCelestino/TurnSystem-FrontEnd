@@ -17,7 +17,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">@</div>
                                     </div>
-                                    <input type="text" class="form-control" id="inlineFormInputGroupUsername" disabled placeholder="NINGUNO">
+                                    <input [value]="turn.descripcion" type="text" class="form-control" id="inlineFormInputGroupUsername" disabled placeholder="NINGUNO">
                                 </div>
 
                                 <label class="encabezado">Turno actual</label>
@@ -63,21 +63,21 @@
                         </div>
 
                         <div class="col-md">
-                            <a class="btn radio">
+                            <a class="btn click radio">
                                 <span class="fa fa-arrow-right"></span><span>SIGIENTE</span>
                             </a>
-                            <a class="btn radio">
+                            <a class="btn click radio">
                                 <span class="fa fa-phone "></span><span>LLAMAR</span>
                             </a>
-                            <a class="btn radio">
+                            <a class="btn click radio">
                                 <span class="fa fa-check "></span><span>ATENDER</span>
                             </a>
                         </div>
                         <div class="col-md">
-                            <a class="btn radio">
+                            <a class="btn click radio">
                                 <span class="fa fa-ban"></span><span>FINALIZAR</span>
                             </a>
-                            <a class="btn radio">
+                            <a class="btn click radio">
                                 <span class="fa fa-trash "></span><span>ANULAR</span>
                             </a>
                         </div>

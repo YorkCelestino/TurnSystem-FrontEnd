@@ -16,8 +16,9 @@ export interface UserSave {
     cedula?: any;
     usuarios ?: string;
     password?: string;
-    id_departamento?: any;
+    id_Departamento?: any;
     estado?: string;
+    role?: any;
 }
 
 export interface Listdepartment {

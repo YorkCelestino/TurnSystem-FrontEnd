@@ -30,20 +30,39 @@ label.encabezado {
     text-decoration: none;
     box-shadow: 0px 3px 0px #373c3c;
     font-family: Poppins-Bold;
+    /* propiedades para la animacion del boton */
+    transition: all 0.20s linear;
+    -webkit-transition: all 0.20s linear;
+    -moz-transition: all 0.20s linear;
+    position: relative;
+    bottom: 0;
+    min-height: 9vh;
+    min-width: 9vh;
+}
+
+.click:active {
+    /* Sombra del boton al clickearlo */
+    box-shadow: 0 0 0 #9a1604, inset 0 0 5px #000000;
+    background: #018db8;
+}
+
+.click {
+    /* Estilos para el fondo del boton */
+    background: #2592f8;
+    box-shadow: 0px 5px 0 rgb(2, 28, 143);
+}
+
+.btn:active {
+    /* Posicion del boton al clickearlo */
+    bottom: -5px;
 }
 
 .btn span {
     margin-right: 20px;
     font-size: 30px;
+    color: white;
 }
 
 .btn.radio {
     border-radius: 50px;
-}
-
-
-/*efecto de los botones*/
-
-.btn:hover {
-    box-shadow: 0px 0px 0px;
 }

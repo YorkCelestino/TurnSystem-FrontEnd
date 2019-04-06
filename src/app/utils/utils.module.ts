@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { UtilsRoutingModule } from './utils-routing.module';
+import { NgxMaskModule } from 'ngx-mask';
+
 
 /**
  *components
@@ -24,6 +26,9 @@ import { MatriculaComponent } from './utilsTurnComponents/matricula/matricula.co
 import { OptionsComponent } from './utilsTurnComponents/options/options.component';
 import { CedulaComponent } from './utilsTurnComponents/cedula/cedula.component';
 import { MotivoTurnoComponent } from './utilsTurnComponents/motivo-turno/motivo-turno.component';
+import { DepartmentTurnoComponent } from './utilsTurnComponents/department-turno/department-turno.component';
+import { ModalInfoComponent } from './utilsConfigComponents/modal-info/modal-info.component';
+import { RegisterMotivosComponent } from './register-motivos/register-motivos.component';
 
 @NgModule({
   declarations: [
@@ -34,12 +39,16 @@ import { MotivoTurnoComponent } from './utilsTurnComponents/motivo-turno/motivo-
     MatriculaComponent,
     OptionsComponent,
     CedulaComponent,
-    MotivoTurnoComponent
+    MotivoTurnoComponent,
+    DepartmentTurnoComponent,
+    ModalInfoComponent,
+    RegisterMotivosComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     FormsModule,
+    NgxMaskModule.forRoot(),
     ReactiveFormsModule,
     UtilsRoutingModule,
   ],
@@ -49,6 +58,7 @@ import { MotivoTurnoComponent } from './utilsTurnComponents/motivo-turno/motivo-
     InfoInstitutionComponent,
     OptionsComponent,
     MatriculaComponent,
+    RegisterMotivosComponent
   ],
   providers: [
     UsersService,

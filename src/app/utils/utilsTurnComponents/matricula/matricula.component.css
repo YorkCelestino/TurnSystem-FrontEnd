@@ -46,7 +46,7 @@ a {
     min-width: 9vh;
 }
 
-.btnoptins {
+.btnoptions {
     background: blue;
     color: #fff;
     font-family: Poppins-Bold;
@@ -67,7 +67,7 @@ a {
 
 .click {
     /* Estilos para el fondo del boton */
-    background: #0084ff;
+    background: #2592f8;
     box-shadow: 0px 5px 0 rgb(2, 28, 143);
 }
 

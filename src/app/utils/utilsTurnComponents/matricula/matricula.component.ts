@@ -78,19 +78,17 @@ import { Router } from '@angular/router';
   addPerson() {
     this.submitted = true;
     if (this.form.invalid) {
-      console.log(this.form.value);
       return;
     } else {
-      console.log(this.form.value);
-      // this.personService.saveUser(this.form.value).subscribe(
-      //   res => {
-      //     console.log(res);
-      //     this.router.navigateByUrl('/turns/motivoTurno');
-      //    },
-      //   err => {
-      //     console.log(err);
-      //   }
-      // );
+      this.personService.saveUser(this.form.value).subscribe(
+        res => {
+          console.log(res);
+          this.router.navigateByUrl('/turns/departmentTurno');
+         },
+        err => {
+          console.log(err);
+        }
+      );
     }
   }
 }

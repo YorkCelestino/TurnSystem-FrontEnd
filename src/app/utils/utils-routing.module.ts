@@ -7,33 +7,33 @@ import { InfoMultimediaComponent } from './utilsConfigComponents/info-multimedia
 
 const secondaryRoutes: Routes = [
 // { path: 'infoInstitution', component: InfoInstitutionComponent}
-  {
-    path: 'infoInstitution',
-    component: AdminComponent,
-    children: [
-      {
-        path: '',
-        component: ConfigurationComponent,
-        children: [
-           {path: '', component: InfoInstitutionComponent}
-        ]
-      }
-    ]
-  },
-  {
-    path: 'InfoMultimedia',
-    component: AdminComponent,
-    children: [
-      {
-        path: '',
-        component: ConfigurationComponent,
-        children: [
-           {path: '', component: InfoMultimediaComponent}
-        ]
-      }
-    ]
+  // {
+  //   path: 'infoInstitution',
+  //   component: AdminComponent,
+  //   children: [
+  //     {
+  //       path: '',
+  //       component: ConfigurationComponent,
+  //       children: [
+  //          {path: '', component: InfoInstitutionComponent}
+  //       ]
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: 'InfoMultimedia',
+  //   component: AdminComponent,
+  //   children: [
+  //     {
+  //       path: '',
+  //       component: ConfigurationComponent,
+  //       children: [
+  //          {path: '', component: InfoMultimediaComponent}
+  //       ]
+  //     }
+  //   ]
 
-  }
+  // }
 
 ];
 @NgModule({
